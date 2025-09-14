@@ -252,7 +252,7 @@
       });
     }
 
-    // ===== منقي الأسئلة حسب اللغة/التصنيف =====
+    // ===== منقي الأسئلة حسب اللغة/التصنيفات =====
     function pool(){
       const lang = langSel.value, cat = catSel.value;
       const arr = QUESTIONS.filter(q => q.lang===lang && (cat==='all' || q.category===cat));
