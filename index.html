@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
@@ -28,7 +28,7 @@
     .timer>i{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--accent),#eab308);transition:width .2s linear}
     .q-title{font-size:clamp(18px,2.4vw,22px);margin:12px 0 6px}
     .options{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
-    .option{display:flex;gap:10px;align-items:center;background:#0b1220;border:1px solid rgba(148,163,184,.25);border-radius:14px;padding:12px;cursor:pointer;transition:background .2s,border-color .2s}
+    .option{color: var(--txt); display:flex;gap:10px;align-items:center;background:#0b1220;border:1px solid rgba(148,163,184,.25);border-radius:14px;padding:12px;cursor:pointer;transition:background .2s,border-color .2s}
     .option:hover{background:#0f172a}.option.correct{border-color:rgba(34,197,94,.8)}.option.wrong{border-color:rgba(239,68,68,.9)}
     .explain{margin-top:10px;color:#cbd5e1;font-size:14px}
     .leaderboard h3,.rules h3,.settings h3{margin:8px 0 12px;font-size:18px}
@@ -47,9 +47,9 @@
     <header>
       <h1>CyberSecure Quiz <span class="badge">نسخة تجريبية</span></h1>
       <div class="actions">
-        <button class="btn ghost" id="toggleDir" title="تبديل اتجاه الواجهة">RTL/LTR</button>
+        <button class="btn ghost" id="toggleDir">RTL/LTR</button>
         <button class="btn" id="resetBtn">إعادة</button>
-        <button class="btn primary" id="startBtn">ابدأ اللعب</button>
+        <button class="btn primary" id="headerStartBtn">ابدأ اللعب</button>
       </div>
     </header>
 
@@ -117,11 +117,11 @@
             <label class="switch"><input type="checkbox" id="soundChk" checked> أصوات</label>
             <label class="switch"><input type="checkbox" id="negChk"> خصم على الخطأ (‑10)</label>
             <label class="switch hidden"><input type="checkbox" id="streakChk" checked> مضاعف سلسلة الإجابات</label>
-            <button class="btn ghost" id="toggleDir">RTL/LTR</button>
+            <button class="btn ghost" id="settingsToggleDir">RTL/LTR</button>
           </div>
           <div class="row" style="margin-top:8px">
-            <button class="btn" id="resetBtn">إعادة</button>
-            <button class="btn primary" id="startBtn">ابدأ اللعب</button>
+            <button class="btn" id="settingsResetBtn">إعادة</button>
+            <button class="btn primary" id="settingsStartBtn">ابدأ اللعب</button>
           </div>
         </section>
 
@@ -174,12 +174,26 @@
       {lang:'ar', category:'wifi', type:'mcq', q:'أي امتداد ملف تحذر منه بالبريد؟', options:['.pdf','.jpg','.exe','.txt'], answer:2, explain:'ملفات التنفيد قد تحتوي برمجيات خبيثة.'},
       {lang:'ar', category:'wifi', type:'tf', q:'تحديثات النظام لسد الثغرات.', options:['صح','خطأ'], answer:0, explain:'تُحسن الحماية.'},
       {lang:'ar', category:'wifi', type:'scenario', q:'Wi‑Fi عامة بدون كلمة مرور. ماذا تفعل؟', options:['أدخل بياناتي البنكية','أستخدم VPN أو أؤجل المعاملات الحساسة'], answer:1, explain:'تجنب إدخال بيانات حساسة على شبكات عامة.'},
-
-      // English sample
-      {lang:'en', category:'passwords', type:'mcq', q:'Which password is strongest?', options:['Password2024','R!y@dh-2_0_2_4','12345678','Qwerty!'], answer:1, explain:'Use length 12+, mixed case, numbers, symbols.'},
-      {lang:'en', category:'phishing', type:'tf', q:'Enabling 2FA reduces account compromise risk.', options:['True','False'], answer:0, explain:'2FA adds a second factor.'}
+      
+      // أسئلة عربية إضافية
+      {lang:'ar', category:'phishing', type:'mcq', q:'ما هي الهندسة الاجتماعية؟', options:['هجمات إلكترونية','استخدام الخداع النفسي للحصول على معلومات سرية','اختراق شبكة الواي فاي','تطوير تطبيقات أمنية'], answer:1, explain:'الهندسة الاجتماعية تعتمد على استغلال العامل البشري.'},
+      {lang:'ar', category:'passwords', type:'mcq', q:'ما هي أهمية استخدام مدير كلمات المرور؟', options:['لحفظ كلمة مرور واحدة فقط','لتحسين سرعة الإنترنت','لإنشاء وتخزين كلمات مرور قوية وفريدة بشكل آمن','للتأكد من أن المواقع آمنة'], answer:2, explain:'مدير كلمات المرور يسهل عملية استخدام كلمات مرور معقدة ومختلفة لكل موقع.'},
+      {lang:'ar', category:'wifi', type:'tf', q:'شبكة Wi-Fi التي تحمل اسم "Free Public Wi-Fi" هي دائمًا آمنة.', options:['صح','خطأ'], answer:1, explain:'الشبكات العامة المجانية غالبًا ما تكون غير آمنة وقد تسمح للمتسللين بالوصول إلى بياناتك.'},
+      
+      // English questions
+      {lang:'en', category:'passwords', type:'mcq', q:'What is a good way to protect your passwords?', options:['Reuse the same password on all sites','Write them down on a sticky note','Use a strong, unique password for each account'], answer:2, explain:'Using unique, strong passwords prevents one compromised account from affecting others.'},
+      {lang:'en', category:'phishing', type:'tf', q:'Phishing emails are always easy to spot.', options:['True','False'], answer:1, explain:'Modern phishing emails can be very convincing and hard to distinguish from legitimate ones.'},
+      {lang:'en', category:'phishing', type:'mcq', q:'Which of the following is a sign of a phishing attempt?', options:['A generic greeting like "Dear Customer"','An urgent request for personal information','A link with a suspicious URL','All of the above'], answer:3, explain:'Phishing attempts often use a combination of these tactics to deceive you.'},
+      {lang:'en', category:'wifi', type:'mcq', q:'What is a firewall?', options:['A physical wall to block hackers','A security system that controls network traffic','A type of antivirus software','A public Wi-Fi access point'], answer:1, explain:'A firewall acts as a barrier, monitoring and controlling incoming and outgoing network traffic.'},
+      {lang:'en', category:'wifi', type:'tf', q:'Using a VPN on public Wi-Fi is a good security practice.', options:['True','False'], answer:0, explain:'A VPN encrypts your traffic, protecting your data from being intercepted on unsecured networks.'},
+      {lang:'en', category:'passwords', type:'scenario', q:'You receive a text from a bank asking you to log in to verify your account. What should you do?', options:['Click the link and log in immediately','Call the bank using the number on their official website','Reply to the text asking for more info'], answer:1, explain:'Never click on links in suspicious messages. Always use an official, verified contact method.'},
+      
+      // English questions additional
+      {lang:'en', category:'phishing', type:'mcq', q:'What does "malware" stand for?', options:['Malicious software','Management software','Marketing software','Maintenance software'], answer:0, explain:'Malware is a broad term for any malicious software designed to harm or exploit a device.'},
+      {lang:'en', category:'phishing', type:'tf', q:'It is safe to download attachments from senders you don\'t know.', options:['True','False'], answer:1, explain:'Unknown attachments can contain malware, so it\'s best to avoid them.'},
+      {lang:'en', category:'passwords', type:'mcq', q:'Why is it important to update your software and operating system regularly?', options:['To get new features','To fix bugs and security vulnerabilities','To change the look of the interface','To make your device run faster'], answer:1, explain:'Updates often include security patches that fix weaknesses hackers can exploit.'},
+      {lang:'en', category:'wifi', type:'tf', q:'You should disable Bluetooth and Wi-Fi when you are not using them.', options:['True','False'], answer:0, explain:'Disabling them reduces your device\'s visibility and potential attack surface.'}
     ];
-
     // ===== أصوات خفيفة =====
     const SND = {
       ok: new Audio(URL.createObjectURL(new Blob([new Uint8Array([82,73,70,70,26,0,0,0,87,65,86,69,102,109,116,32,16,0,0,0,1,0,1,0,68,172,0,0,136,88,1,0,1,0,8,0,100,97,116,97,2,0,0,0,255,127])],{type:'audio/wav'}))),
@@ -200,15 +214,18 @@
     const secEl = document.getElementById('sec');
     const barEl = document.getElementById('bar');
     const nextBtn = document.getElementById('nextBtn');
-    const startBtn = document.getElementById('startBtn');
-    const resetBtn = document.getElementById('resetBtn');
+    const headerStartBtn = document.getElementById('headerStartBtn');
+    const headerResetBtn = document.getElementById('resetBtn');
+    const settingsStartBtn = document.getElementById('settingsStartBtn');
+    const settingsResetBtn = document.getElementById('settingsResetBtn');
     const endCard = document.getElementById('endCard');
     const finalScore = document.getElementById('finalScore');
     const playAgain = document.getElementById('playAgain');
     const playerName = document.getElementById('playerName');
     const saveLB = document.getElementById('saveLB');
     const lbList = document.getElementById('lbList');
-    const toggleDir = document.getElementById('toggleDir');
+    const headerToggleDir = document.getElementById('toggleDir');
+    const settingsToggleDir = document.getElementById('settingsToggleDir');
     const langSel = document.getElementById('langSel');
     const levelSel = document.getElementById('levelSel');
     const catSel = document.getElementById('catSel');
@@ -282,13 +299,13 @@
     function end(){ state.running=false; clearInterval(state.timerId); finalScore.textContent=state.score; endCard.classList.add('active'); }
 
     // ===== مشاركة و QR =====
-   shareBtn.addEventListener('click', async () => {
+    shareBtn.addEventListener('click', async () => {
     const txt = `${document.title} - ${state.score}`;
     try {
-        await navigator.clipboard.writeText(txt + ' ' + location.href);
-        alert('تم نسخ الرابط! يمكنك مشاركته الآن.');
+      await navigator.clipboard.writeText(txt + ' ' + location.href);
+      alert('تم نسخ الرابط! يمكنك مشاركته الآن.');
     } catch (err) {
-        alert('حدث خطأ أثناء النسخ.');
+      alert('حدث خطأ أثناء النسخ.');
     }
 });
 
@@ -317,12 +334,15 @@
     });
 
     // ===== أحداث عامة =====
-    startBtn.addEventListener('click', startGame);
-    resetBtn.addEventListener('click', ()=>{ state.running=false; clearInterval(state.timerId); startGame(); });
+    headerStartBtn.addEventListener('click', startGame);
+    headerResetBtn.addEventListener('click', ()=>{ state.running=false; clearInterval(state.timerId); startGame(); });
+    settingsStartBtn.addEventListener('click', startGame);
+    settingsResetBtn.addEventListener('click', ()=>{ state.running=false; clearInterval(state.timerId); startGame(); });
     nextBtn.addEventListener('click', next);
     playAgain.addEventListener('click', startGame);
     saveLB.addEventListener('click', ()=>{ const name=(playerName.value||'لاعب مجهول').slice(0,32); const rows=loadLB(); rows.push({name,score:state.score,ts:Date.now()}); rows.sort((a,b)=> b.score-a.score || a.ts-b.ts); saveLBData(rows); renderLB(); playerName.value=''; });
-    toggleDir.addEventListener('click', ()=>{ const r=document.documentElement; r.setAttribute('dir', r.getAttribute('dir')==='rtl' ? 'ltr' : 'rtl'); });
+    headerToggleDir.addEventListener('click', ()=>{ const r=document.documentElement; r.setAttribute('dir', r.getAttribute('dir')==='rtl' ? 'ltr' : 'rtl'); });
+    settingsToggleDir.addEventListener('click', ()=>{ const r=document.documentElement; r.setAttribute('dir', r.getAttribute('dir')==='rtl' ? 'ltr' : 'rtl'); });
     langSel.addEventListener('change', ()=>{ renderLB(); });
 
     // بداية
@@ -330,4 +350,3 @@
   </script>
 </body>
 </html>
-
